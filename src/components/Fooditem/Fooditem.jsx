@@ -1,0 +1,40 @@
+import React, { useContext } from 'react'
+import"./Fooditem.css"
+import { assets } from '../../assets/assets'
+import { StoreContext } from '../../Context/StoreContext';
+
+export const Fooditem = ({id,name,price,description,image}) => {
+
+const{carItem,addToCart,removeFromCart} = useContext(StoreContext);
+
+
+
+
+
+
+  return (
+    <div className='food-item'>
+        <div className="foot-item-img-container">
+            <img  src={image} alt="" className="food-item-image" />
+            {!carItem[id]
+            ?<img className="add" onClick={()=>addToCart(id)} src={assets.add_icon_white} alt="" />
+          :<div className='food-item-counter'>
+
+            <img onClick={()=>removeFromCart(id)} src={assets.remove_icon_red} alt="" />
+            <p>{carItem[id]}</p>
+            <img onClick={()=>addToCart(id)} src={assets.add_icon_green} alt="" />
+            </div>
+            }
+        </div>
+        <div className="food-item-info">
+            <div className="food-item-name-rating">
+                <p>{name}</p>
+                <img src={assets.rating_starts} alt="" />
+            </div>
+            <p className="food-item-desc">{description}</p>
+            <p className="food-item-price">${price}</p>
+        </div>
+        
+    </div>
+  )
+}
